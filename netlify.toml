@@ -1,14 +1,15 @@
 # Netlify config - aponta pra subpasta privatesocial/
-# Sem isso, o Netlify procura package.json na raiz e não acha.
 
 [build]
   base = "privatesocial"
-  command = "npx prisma generate && npx prisma db push --skip-generate && npx tsx prisma/seed.ts && npm run build"
+  command = "npm run build"
   publish = ".next"
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
   NODE_VERSION = "20"
+  # Permite que o Prisma rode durante o build sem warnings
+  PRISMA_HIDE_UPDATE_MESSAGE = "true"
 
 # Plugin oficial do Next.js — gera funções serverless automaticamente
 [[plugins]]
